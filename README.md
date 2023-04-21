@@ -1,11 +1,14 @@
-name_any_color
-"name_any_color" is a JavaScript library that can be used to find the closest color name to any given color value. This library can be installed using npm, and can be used on any JavaScript framework or environment that supports the CommonJS module system.
+# name_any_color
 
-Installation
-To install "name_any_color" using npm, run the following command:
+A JavaScript library for finding the closest color name to any given color value..
+This npm module can be used on any JavaScript framework or environment that supports the CommonJS module system .
+
+## Installation
+
 npm install name_any_color
 
-Usage
+## Usage
+
 To use "name_any_color", you can import it into your JavaScript code using the following syntax:
 const nac = require('name_any_color');
 
