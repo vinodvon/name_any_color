@@ -1,5 +1,5 @@
 {
-  "name": "name_the_color",
+  "name": "name_any_color",
   "version": "1.0.0",
   "description": "A library for finding the name of a given color value.",
   "main": "index.js",
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinodvon/name_the_color.git"
+    "url": "git+https://github.com/vinodvon/name_any_color.git"
   },
   "author": "vinodvon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vinodvon/name_the_color/issues"
+    "url": "https://github.com/vinodvon/name_any_color/issues"
   },
-  "homepage": "https://github.com/vinodvon/name_the_color#readme"
+  "homepage": "https://github.com/vinodvon/name_any_color#readme"
 }

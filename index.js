@@ -1,3 +1,3 @@
-const name_the_color = require("./src/name_the_color");
+const name_any_color = require("./src/name_any_color");
 
-module.exports = name_the_color;
+module.exports = name_any_color;

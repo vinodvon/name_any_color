@@ -1,10 +1,10 @@
-const name_the_color = {
+const name_any_color = {
   init: function () {
-    for (let i = 0; i < name_the_color.names.length; i++) {
-      const color = "#" + name_the_color.names[i][0];
+    for (let i = 0; i < name_any_color.names.length; i++) {
+      const color = "#" + name_any_color.names[i][0];
       const [r, g, b] = this.rgb(color);
       const [h, s, l] = this.hsl(color);
-      name_the_color.names[i].push(r, g, b, h, s, l);
+      name_any_color.names[i].push(r, g, b, h, s, l);
     }
   },
 
@@ -34,30 +34,30 @@ const name_the_color = {
     let df = -1;
     let cl = -1;
     let min = 0;
-    let max = name_the_color.names.length - 1;
+    let max = name_any_color.names.length - 1;
     while (min <= max) {
       const mid = Math.floor((min + max) / 2);
-      if (color === "#" + name_the_color.names[mid][0]) {
+      if (color === "#" + name_any_color.names[mid][0]) {
         return [
-          "#" + name_the_color.names[mid][0],
-          name_the_color.names[mid][1],
+          "#" + name_any_color.names[mid][0],
+          name_any_color.names[mid][1],
           true,
         ];
       }
       const ndf1 =
-        Math.pow(r - name_the_color.names[mid][2], 2) +
-        Math.pow(g - name_the_color.names[mid][3], 2) +
-        Math.pow(b - name_the_color.names[mid][4], 2);
+        Math.pow(r - name_any_color.names[mid][2], 2) +
+        Math.pow(g - name_any_color.names[mid][3], 2) +
+        Math.pow(b - name_any_color.names[mid][4], 2);
       const ndf2 =
-        Math.pow(h - name_the_color.names[mid][5], 2) +
-        Math.pow(s - name_the_color.names[mid][6], 2) +
-        Math.pow(l - name_the_color.names[mid][7], 2) * 2;
+        Math.pow(h - name_any_color.names[mid][5], 2) +
+        Math.pow(s - name_any_color.names[mid][6], 2) +
+        Math.pow(l - name_any_color.names[mid][7], 2) * 2;
       const ndf = ndf1 + ndf2;
       if (df < 0 || df > ndf) {
         df = ndf;
         cl = mid;
       }
-      if (color < "#" + name_the_color.names[mid][0]) {
+      if (color < "#" + name_any_color.names[mid][0]) {
         max = mid - 1;
       } else {
         min = mid + 1;
@@ -65,7 +65,7 @@ const name_the_color = {
     }
     return cl < 0
       ? ["#000000", "Invalid Color: " + color, false]
-      : ["#" + name_the_color.names[cl][0], name_the_color.names[cl][1], false];
+      : ["#" + name_any_color.names[cl][0], name_any_color.names[cl][1], false];
   },
 
   hexToRgb: function (hex) {
@@ -125,6 +125,10 @@ const name_the_color = {
 
   hex: function (r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  },
+
+  clamp: function (value, min, max) {
+    return Math.min(Math.max(value, min), max);
   },
 
   adjustColor: function (color, amount) {
@@ -1713,6 +1717,6 @@ const name_the_color = {
   ],
 };
 
-name_the_color.init();
+name_any_color.init();
 
-module.exports = name_the_color;
+module.exports = name_any_color;
