@@ -1,10 +1,10 @@
-const ntc = {
+const name_the_color = {
   init: function () {
-    for (let i = 0; i < ntc.names.length; i++) {
-      const color = "#" + ntc.names[i][0];
+    for (let i = 0; i < name_the_color.names.length; i++) {
+      const color = "#" + name_the_color.names[i][0];
       const [r, g, b] = this.rgb(color);
       const [h, s, l] = this.hsl(color);
-      ntc.names[i].push(r, g, b, h, s, l);
+      name_the_color.names[i].push(r, g, b, h, s, l);
     }
   },
 
@@ -34,26 +34,30 @@ const ntc = {
     let df = -1;
     let cl = -1;
     let min = 0;
-    let max = ntc.names.length - 1;
+    let max = name_the_color.names.length - 1;
     while (min <= max) {
       const mid = Math.floor((min + max) / 2);
-      if (color === "#" + ntc.names[mid][0]) {
-        return ["#" + ntc.names[mid][0], ntc.names[mid][1], true];
+      if (color === "#" + name_the_color.names[mid][0]) {
+        return [
+          "#" + name_the_color.names[mid][0],
+          name_the_color.names[mid][1],
+          true,
+        ];
       }
       const ndf1 =
-        Math.pow(r - ntc.names[mid][2], 2) +
-        Math.pow(g - ntc.names[mid][3], 2) +
-        Math.pow(b - ntc.names[mid][4], 2);
+        Math.pow(r - name_the_color.names[mid][2], 2) +
+        Math.pow(g - name_the_color.names[mid][3], 2) +
+        Math.pow(b - name_the_color.names[mid][4], 2);
       const ndf2 =
-        Math.pow(h - ntc.names[mid][5], 2) +
-        Math.pow(s - ntc.names[mid][6], 2) +
-        Math.pow(l - ntc.names[mid][7], 2) * 2;
+        Math.pow(h - name_the_color.names[mid][5], 2) +
+        Math.pow(s - name_the_color.names[mid][6], 2) +
+        Math.pow(l - name_the_color.names[mid][7], 2) * 2;
       const ndf = ndf1 + ndf2;
       if (df < 0 || df > ndf) {
         df = ndf;
         cl = mid;
       }
-      if (color < "#" + ntc.names[mid][0]) {
+      if (color < "#" + name_the_color.names[mid][0]) {
         max = mid - 1;
       } else {
         min = mid + 1;
@@ -61,7 +65,21 @@ const ntc = {
     }
     return cl < 0
       ? ["#000000", "Invalid Color: " + color, false]
-      : ["#" + ntc.names[cl][0], ntc.names[cl][1], false];
+      : ["#" + name_the_color.names[cl][0], name_the_color.names[cl][1], false];
+  },
+
+  hexToRgb: function (hex) {
+    const [r, g, b] = this.rgb(hex);
+    return `rgb(${r}, ${g}, ${b})`;
+  },
+
+  rgbToHex: function (r, g, b) {
+    return this.hex(r, g, b);
+  },
+
+  hexToHsl: function (hex) {
+    const [h, s, l] = this.hsl(hex);
+    return `hsl(${h}, ${s}%, ${l}%)`;
   },
 
   hsl: function (color) {
@@ -71,6 +89,7 @@ const ntc = {
     let h, s, l;
     l = (min + max) / 2;
     if (min === max) {
+      h;
       h = s = 0;
     } else {
       const d = max - min;
@@ -106,6 +125,22 @@ const ntc = {
 
   hex: function (r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  },
+
+  adjustColor: function (color, amount) {
+    const [r, g, b] = this.rgb(color);
+    return this.hex(
+      this.clamp(r + amount, 0, 255),
+      this.clamp(g + amount, 0, 255),
+      this.clamp(b + amount, 0, 255)
+    );
+  },
+
+  randomColor: function () {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return this.hex(r, g, b);
   },
 
   names: [
@@ -1678,6 +1713,6 @@ const ntc = {
   ],
 };
 
-ntc.init();
+name_the_color.init();
 
-export { ntc };
+module.exports = name_the_color;
