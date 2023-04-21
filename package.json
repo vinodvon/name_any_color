@@ -5,9 +5,9 @@
   "main": "index.js",
   "keywords": [
     "colors",
+    "names",
     "rgb",
-    "hsl",
-    "names"
+    "hex"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
